@@ -14,8 +14,8 @@
 			<img id="img_logo" src="./img/logo.png" alt="">
                         <?php echo("<h1 id='cabezal'>"."Todo Juegos"."</h1>") ?>
                         <div id="menu_usuario">
-                            <a href="#">Registrarse</a>
-                            <a href="#">Iniciar sesion</a>
+                            <a href="register.php">Registrarse</a>
+                            <a href="login.php">Iniciar sesion</a>
                             <img id="img_user" src="./img/usuario.png" alt="">
                         </div>
 		</div>

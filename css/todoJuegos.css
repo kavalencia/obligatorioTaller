@@ -58,6 +58,34 @@ body {
         display: inline-block;
         width: 20%;
 }
+
+#logearse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;       
+}
+
+#registrarse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;       
+}
+
+#container-principal {
+    display: block;
+}
+.ui-form {
+    display: block;
+}
+
+.form-control-border{
+    position: relative;
+    background-color: rgba(0,0,0,.25);
+    height: 0.1px;
+    height: 100%;
+}
 /*#encabezado img {
         display: block;
         float: left;

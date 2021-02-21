@@ -8,12 +8,15 @@ body {
 
 #encabezado {
 	text-align: center;
-        display: block;
+        display: flex;
+        /*justify-content: center;*/
+        justify-content: space-around;
+        align-items: center;
 }
 
 #encabezado h1 {
         display: inline-block;
-        width: 50%;
+        width: 100%;
 }
 
 #encabezado cabezal {
@@ -36,9 +39,14 @@ body {
 }
 
 #menu_usuario {
-        display: inline-block;
+        display: inline;
         text-align: right;
         width: 25%;
+}
+
+#menu_usuario a{    
+        text-decoration: none;
+        color:black;
 }
 
 #img_user{

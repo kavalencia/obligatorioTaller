@@ -7,6 +7,6 @@
     </head>
     <body>
         {include file="encabezadoSinLogin.tpl"}  
-        {include file="ingresoDatos.tpl"}
+        {include file="ingresoDatosV2.tpl"}
     </body>
 </html> 

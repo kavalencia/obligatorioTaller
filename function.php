@@ -1,7 +1,6 @@
 <?php
 require_once './libs/Smarty.class.php';
 
-
 function getSmarty(){
     $mySmarty = new Smarty();
     $mySmarty->template_dir = 'Templates';

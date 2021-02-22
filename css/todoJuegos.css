@@ -34,9 +34,19 @@ body {
 }
 
 #menu_usuario {
-        display: inline;
+        display: flex;
         text-align: right;
         width: 25%;
+}
+
+#menu_usuario menu_admin {
+    display: inline-block;
+    text-align: left;
+}
+
+#menu_usuario img_admin {
+    display: inline-block;
+    text-align: right;
 }
 
 #menu_usuario a{    

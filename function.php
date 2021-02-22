@@ -53,8 +53,6 @@ function abrirConexion() {
     
     $conexion = new PDO("mysql:host=localhost;dbname=catalogo_juegos", $usuario, $clave);
     
-    //$conexion->conectar();
-    
     return $conexion;
 }
 

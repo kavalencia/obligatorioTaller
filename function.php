@@ -60,3 +60,22 @@ function logout() {
     unset($_SESSION['usuarioLogueado']);
     session_destroy();
 }
+
+function insertarJuego($juego) {
+    
+    $conexion = abrirConexion();
+    
+    $sql = "INSERT INTO Juegos(nombre, id_genero, poster, puntuacion, fecha_lanzamiento, empresa, visualizacines, url_video, resumen) VALUES(:nombre, :id_genero, :poster, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
+    $sentencia = $conexion->prepare($sql);
+    $sentencia->bindParam("nombre", $juego["nombre"], PDO::PARAM_STR);
+    $sentencia->bindParam("id_genero", $juego["id_genero"], PDO::PARAM_INT);
+    $sentencia->bindParam("poster", $juego["poster"], PDO::PARAM_LOB);
+    $sentencia->bindParam("puntuacion", $juego["puntuacion"], PDO::PARAM_INT);
+    $sentencia->bindParam("fecha_lanzamiento", $juego["fecha_lanzamiento"], PDO::PARAM_STR);
+    $sentencia->bindParam("empresa", $juego["empresa"], PDO::PARAM_STR);
+    $sentencia->bindParam("visualizacines", $juego["visualizacines"], PDO::PARAM_INT);
+    $sentencia->bindParam("url_video", $juego["url_video"], PDO::PARAM_STR);
+    $sentencia->bindParam("resumen", $juego["resumen"], PDO::PARAM_STR);
+    
+    $sentencia->execute();
+}

@@ -90,6 +90,16 @@ body {
     display: block;
     align-content: center;
 }
+
+#contenedorAgregarJuego {
+    display: flex;
+    justify-content: center;
+}
+
+#datosJuego {
+    display: inline;
+}
+
 .ui-form {
     display: block;
 }

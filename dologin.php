@@ -4,7 +4,11 @@
 
     $usuario = $_POST["usuario"];
     $clave = $_POST["clave"];
-
+    
+    //Acá tengo que ir a la base de datos
+    //buscar el usuario en BD
+    //fijarme si es admin y pasar los datos correctos para mostrar el cabezal adecuado.
+    
     $usuarioLogueado = login($usuario, $clave);
 
     if (isset($usuarioLogueado)) {

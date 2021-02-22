@@ -25,7 +25,7 @@ function abrirConexion2() {
 }
 
 function login($usuario, $clave) {
-    if($usuario == 'test' && $clave == 'test') {
+    /*if($usuario == 'test' && $clave == 'test') {
         return array(
           "email" => "test@test.com",
             "alias" => "test",
@@ -34,26 +34,17 @@ function login($usuario, $clave) {
         );
     };
     
-    return NULL;
+    return NULL*/
     
-    /*$conexion = abrirConexion2();
+    $conexion = abrirConexion();
     
-    $sql = "SELECT * FROM categorias WHERE usuario = :usuario";
+    $sql = "SELECT * FROM usuarios WHERE alias = :usuario";
     $sentencia = $conexion->prepare($sql);
     $sentencia->bindParam("usuario", $usuario, PDO::PARAM_STR);
     $sentencia->execute();
-    $usuarioLogeado = $sentencia->fetch(PDO::FETCH_ASSOC);
+    $usuarioLogueado = $sentencia->fetch(PDO::FETCH_ASSOC);
     
-    return array(
-        usuario => $usuarioLogeado->email,
-        nombre => $usuarioLogeado->nombre,
-        clave => $usuarioLogeado->nombre,
-        
-    );
-    
-    $conexion->consulta($sql);
-    
-    return $conexion->restantesRegistros(); */
+    return $usuarioLogueado;
 }
 
 function abrirConexion() {

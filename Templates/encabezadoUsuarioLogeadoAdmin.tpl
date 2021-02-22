@@ -12,10 +12,9 @@
         {if isset($usuarioLogueado)}
             Hola administrador {$usuarioLogueado.alias}
             <a href="./addGame.php">Alta Juego</a>
-            <a href="./addGame.php">Revision Comentarios</a>
+            <a href="./reviewComment.php">Revision Comentarios</a>
             <a href="./dologout.php">Cerrar Sesion</a>
         {else}
-            Hola administrador {$usuarioLogueado.alias}
             <a href="register.php">Registrarse</a>
             <a href="login.php">Iniciar sesion</a>
         {/if}

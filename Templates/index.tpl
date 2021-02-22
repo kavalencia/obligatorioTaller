@@ -7,17 +7,21 @@
     </head>
     <body>
         {if isset($usuarioLogueado)}
-            {if {$usuarioLogueado.esAdmin} == 1}
+            {if {$usuarioLogueado.es_admin} == 1}
                 {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
+                {$usuarioLogueado.email}
                 hola
             {else}
                 {include file="encabezadoUsuarioLogeadoComun.tpl" usuarioLogueado=$usuarioLogueado}
+                {$usuarioLogueado.email}
+
                 hola2
             {/if}
         {else}
             {include file="encabezado.tpl" usuarioLogueado=$usuarioLogueado}
+            {$usuarioLogueado.email}
             hola3
         {/if}
-        {include file="contenedorPrincipal.tpl"}  
+        {include file="contenedorPrincipal.tpl" usuarioLogueado=$usuarioLogueado}  
     </body>
 </html> 

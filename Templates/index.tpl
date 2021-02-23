@@ -6,7 +6,10 @@
         <link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
     </head>
     <body>
-        {include file="encabezado.tpl"}  
-        {include file="contenedorPrincipal.tpl"}  
+        {include file="encabezado.tpl"}
+        <div class="titulo-juegos"><a>Juegos</a></div>
+        {include file="contenedorPrincipal.tpl" juegos=$juegos}  
+        
+        
     </body>
 </html> 

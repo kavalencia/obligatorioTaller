@@ -2,6 +2,15 @@
 require_once './libs/Smarty.class.php';
 
 
+function abrirConexion() {
+    $usuario = "root";
+    $clave="root";  
+    $conexion = new ConexionBD("mysql", "localhost", "catalogo_juego", $usuario, $clave);
+    $conexion->conectar();
+    
+    return $conexion;
+}
+
 function getSmarty(){
     $mySmarty = new Smarty();
     $mySmarty->template_dir = 'Templates';
@@ -12,6 +21,21 @@ function getSmarty(){
     return $mySmarty;
 }
 
+
+
+
+
+function getJuego($id){
+    $conexion = abrirConexion();
+    $sql = "SELECT * FROM juegos WHERE id = :id";
+    $sentencia = $conexion->prepare($sql);
+    $sentencia->bindParam("id", $id, PDO::PARAM_INT);
+    $sentencia->execute();
+    $categoria = $sentencia->fetch(PDO::FETCH_ASSOC);   
+    return $juego;
+}
+
+/*
 function getJuego($id){
     $juego = NULL;
     foreach (getJuegosDeSeleccion() as $juego) {   
@@ -21,7 +45,17 @@ function getJuego($id){
     }
     return $juego;
 }
+*/
 
+
+function getJuegosDeSeleccion(){
+    $conexion = abrirConexion();
+    $sql = "SELECT * FROM juegos";
+    $conexion->consulta($sql);    
+    return $conexion->restantesRegistros();
+}
+
+/*
 function getJuegosDeSeleccion() {
     $juegos = array();
         $juegos[] = array("id" => 1, 
@@ -75,6 +109,7 @@ function getJuegosDeSeleccion() {
           "precio" => 195, 
           "imagen" => "juegoImg");
           return $juegos;
-}
+}*/
     
+
 

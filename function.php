@@ -1,5 +1,6 @@
 <?php
 
+ini_set('display_errors', 1);
 require_once 'class.Conexion.BD.php';
 require_once './libs/Smarty.class.php';
 

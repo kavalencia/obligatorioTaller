@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
 ini_set('display_errors', 1);
 require_once 'function.php';
@@ -10,10 +9,5 @@ if(isset($_SESSION['usuarioLogueado'])) {
 }
 
 $mySmarty = getSmarty();
-
-$juegos = getJuegosDeSeleccion();
-$mySmarty->assign("juegos", $juegos);
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
-$mySmarty->display("index.tpl");
-?>
-
+$mySmarty->display("addGame.tpl");

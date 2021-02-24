@@ -5,9 +5,7 @@ body {
 *{
     box-sizing: border-box;
 }
-/*ul {
-        list-style: none;
-}*/
+
 
 #encabezado {
     text-align: center;
@@ -47,6 +45,16 @@ body {
     width: 25%;
 }
 
+#menu_usuario menu_admin {
+    display: inline-block;
+    text-align: left;
+}
+
+#menu_usuario img_admin {
+    display: inline-block;
+    text-align: right;
+}
+
 #menu_usuario a{    
     text-decoration: none;
     color:black;
@@ -83,7 +91,18 @@ body {
 #container-principal {
     display: block;
     justify-content: space-around;
+
 }
+
+#contenedorAgregarJuego {
+    display: flex;
+    justify-content: center;
+}
+
+#datosJuego {
+    display: inline;
+}
+
 .ui-form {
     display: block;
 }
@@ -111,8 +130,8 @@ body {
 }
 
 #juegos img {
-    float: left;
-    width: 100px;
+  float: left;
+  width: 100px;
 }
 
 .juego {
@@ -246,3 +265,5 @@ body {
         float: right;
         font-weight: bold;
 }*/
+
+}

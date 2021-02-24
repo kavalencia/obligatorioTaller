@@ -2,11 +2,11 @@
 <html>
     <head>		 
         <meta charset="utf-8" lang="es">
-        <title>TODO JUEGOS</title>
+        <title>Agregar Juego</title>
         <link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
     </head>
     <body>
-        {include file="encabezado.tpl"}  
-        {include file="contenedorPrincipal.tpl"}  
+        {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
+        {include file="contenedorAgregarJuego.tpl"}
     </body>
 </html> 

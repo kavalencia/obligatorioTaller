@@ -1,5 +1,4 @@
 <?php
-
 class ConexionBD
 {
 	var $dsn;

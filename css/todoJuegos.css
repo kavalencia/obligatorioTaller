@@ -114,7 +114,7 @@ body {
     height: 100%;
 }
 
-#contenedorPrincipal{
+#contenedorJuegos{
     display: flex;
 
 }
@@ -145,6 +145,21 @@ body {
 
 .destacado{
     min-width: 200px;
+}
+
+.juego-destacado img {
+  float: left;
+  width: 100px;
+}
+
+.juego-destacado{
+    
+    border: 1px solid #CCCCCC;
+    margin: 2px;
+    padding: 10px;
+    width: calc(25% - 6px);
+    min-height: 130px;  
+    height: 100%;
 }
 
 .filter{

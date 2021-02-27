@@ -65,8 +65,20 @@ function getJuego($id){
 
 function getJuegosDeSeleccion(){
     $conexion = abrirConexion();
-    // "SELECT j.id, j.nombre, g.genero, j.poster, j.puntuacion FROM juegos j, generos g WHERE j.id_genero = g.id";
-    $sql = "SELECT * FROM juegos";
+    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id";
+    $conexion->consulta($sql);    
+    return $conexion->restantesRegistros();
+}
+
+
+function getJuegoDestacado(){
+    $conexion = abrirConexion();
+    $sql = "SELECT j.*, COUNT(*) AS cant_comentarios
+            FROM juegos j, comentarios c
+            WHERE j.id = c.id_juego
+            GROUP BY j.id
+            ORDER BY cant_comentarios DESC
+            LIMIT 1";
     $conexion->consulta($sql);    
     return $conexion->restantesRegistros();
 }

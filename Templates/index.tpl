@@ -17,7 +17,11 @@
             {include file="encabezado.tpl" usuarioLogueado=$usuarioLogueado}
         {/if}
         <div class="titulo-juegos"><a>Juegos</a></div>
-        {include file="contenedorPrincipal.tpl" juegos=$juegos}  
+        {foreach from=$destacado item=dest}
+             {include file="destacado.tpl" dest=$dest}
+        {/foreach}
+        
+        {include file="contenedorJuegos.tpl" juegos=$juegos}  
 
     </body>
 </html> 

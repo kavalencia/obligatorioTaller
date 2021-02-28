@@ -13,7 +13,8 @@
             {if isset($usuarioLogueado)}
                 Hola administrador {$usuarioLogueado.alias}
                 <br><a href="./addGame.php">Alta Juego</a>
-                <br><a href="./reviewComment.php">Revision Comentarios</a>
+                <!--br><a class="revisionComentarios" href='#'>Revisión Comentarios</a-->
+                <br><a class="revisionComentarios" href='./reviewComment.php'>Revisión Comentarios</a-->
                 <br><a href="./dologout.php">Cerrar Sesion</a>
             {else}
                 <a href="register.php">Registrarse</a>

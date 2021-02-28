@@ -11,3 +11,4 @@ if(isset($_SESSION['usuarioLogueado'])) {
 $mySmarty = getSmarty();
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
 $mySmarty->display("reviewComment.tpl");
+?>

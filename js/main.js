@@ -10,7 +10,6 @@ function cargar(){
        },
        dataType: "html"
     }).done(function(html){
-        alert('entre a done');
         $("#contenedorComentarios").html(html);
         
         $("#anterior").click(function(){
@@ -29,10 +28,10 @@ function cargar(){
 }
 
 $(document).ready(function(){
-    $(".revisionComentarios").click(function(){
-        pagina = 0;
-        cargar();
-    });
+    //$(".revisionComentarios").click(function(){
+    //    pagina = 0;
+    //    cargar();
+    //});
     
     $("#buscar").click(function(){
         texto = $("#texto").val();
@@ -41,10 +40,12 @@ $(document).ready(function(){
     });
     
     $("#texto").on('keyup', function(){
-        texto = $("texto").val();
+        texto = $("#texto").val();
         pagina = 0;
+        cargar();
     });
     
+    pagina = 0;
     cargar();
 });
 

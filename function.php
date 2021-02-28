@@ -103,17 +103,17 @@ function insertarJuego($juego) {
 
 function borrarComentario($comId){
     $conexion = abrirConexion();
-    
+    $params = array(
+        array("comId", $comId, "int"),
+    );
     $sql = "DELETE FROM comentarios WHERE id = :comId";
-    $sentencia = $conexion->prepare($sql);
-    $sentencia->bindParam("comId", $comId, PDO::PARAM_INT);
-    
-    $sentencia->execute();
+    $conexion->consulta($sql, $params);
+    return $conexion->restantesRegistros(); 
 }
 
 function getComentarios($pagina = 0, $texto = ''){
     
-    $size = 3;
+    $size = 8;
     $offset = $pagina * $size;
     $conexion = abrirConexion();
     
@@ -137,8 +137,8 @@ function ultimaPaginaDeComentarios($texto){
     $sql = "SELECT count(*) as total FROM comentarios WHERE texto LIKE :texto";
     $conexion->consulta($sql, $params);
     $fila = $conexion->siguienteRegistro();
-    $size = 3;
-    $paginas = ceil($fila["total"]/$size) - 1;
+    $size = 8;
+    $pagina = ceil($fila["total"] / $size) - 1;
     
     return $paginas;
 }

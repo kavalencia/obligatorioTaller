@@ -10,6 +10,5 @@
     <body>
         {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
         <div id="contenedorComentarios"></div>
-        {*include file="comentariosPaginados.tpl" comentarios=$comentarios*}
     </body>
 </html> 

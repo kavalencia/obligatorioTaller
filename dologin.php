@@ -6,7 +6,6 @@
     $clave = $_POST["clave"];
     
     $usuarioLogueado = login($usuario, $clave);
-    //TODO Verificar la clave
     
     if (isset($usuarioLogueado)) {
         session_start();

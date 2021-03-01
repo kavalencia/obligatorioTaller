@@ -55,27 +55,34 @@ function getJuegosDeSeleccion(){
 }
 
 function login($usuario, $clave) {
-    $conexion = abrirConexion2();
+    $conexion = abrirConexion();
+    $params = array(
+        array("usuario", $usuario, "string"),
+        array("clave", $clave, "string"),
+    );
+    $sql = "SELECT * FROM usuarios WHERE email = :usuario AND password = :clave";
+    $conexion->consulta($sql, $params);
+    $usuarioLogeado = $conexion->siguienteRegistro();
     
-    $sql = "SELECT * FROM usuarios WHERE alias = :usuario";
-    $sentencia = $conexion->prepare($sql);
-    $sentencia->bindParam("usuario", $usuario, PDO::PARAM_STR);
-    $sentencia->execute();
-    $usuarioLogueado = $sentencia->fetch(PDO::FETCH_ASSOC);
-    
-    return $usuarioLogueado;
+    if ($conexion->cantidadRegistros() >= 1)
+        return $usuarioLogeado;
+    else
+        return NULL;
 }
 
 function register($usuario, $alias, $clave) {
-    $conexion = abrirConexion2();
+    $conexion = abrirConexion();  
+    $es_admin = "0";
+    $params = array(
+        array("usuario", $usuario, "string"),
+        array("alias", $alias, "string"),
+        array("clave", $clave, "string"),
+        array("es_admin", $es_admin, "int"),
+    );
+    $sql = "INSERT INTO usuarios(email, alias, password, es_admin) VALUES(:usuario, :alias, :clave, :es_admin)";
+    $conexion->consulta($sql, $params);
     
-    //$sql = "SELECT * FROM usuarios WHERE alias = :usuario";
-    //$sentencia = $conexion->prepare($sql);
-    //$sentencia->bindParam("usuario", $usuario, PDO::PARAM_STR);
-    //$sentencia->execute();
-    //$usuarioLogueado = $sentencia->fetch(PDO::FETCH_ASSOC);
-    
-    return $usuarioLogueado;
+    return $conexion->ultimoIdInsert();
 }
 
 function logout() {

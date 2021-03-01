@@ -3,7 +3,6 @@
     <div>
         <h1 id='cabezal'>Todo Juegos</h1>
         <form action="/action_page.php">
-
             <input type="search" id="texto" name="gsearch" placeholder="Search">
             <input id="buscar" type="submit">
         </form>
@@ -13,8 +12,6 @@
             {if isset($usuarioLogueado)}
                 Hola administrador {$usuarioLogueado.alias}
                 <br><a href="./addGame.php">Alta Juego</a>
-                <!--br><a class="revisionComentarios" href='#'>Revisión Comentarios</a-->
-                <!--br><a class="revisionComentarios" href='./reviewComment.php'>Revisión Comentarios</a-->
                 <br><a href='./reviewComment.php'>Revisión Comentarios</a>
                 <br><a href="./dologout.php">Cerrar Sesion</a>
             {else}

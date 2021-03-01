@@ -138,7 +138,7 @@ function ultimaPaginaDeComentarios($texto){
     $conexion->consulta($sql, $params);
     $fila = $conexion->siguienteRegistro();
     $size = 8;
-    $pagina = ceil($fila["total"] / $size) - 1;
+    $paginas = ceil($fila["total"] / $size) - 1;
     
     return $paginas;
 }

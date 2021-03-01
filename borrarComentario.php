@@ -11,6 +11,6 @@
         $_SESSION['usuarioLogueado'] = $usuarioLogueado;
         header('location:reviewComment.php');
     } else {
-        header('location:reviewComment?err=1');
+        header('location:reviewComment.php?err=1');
     }
 

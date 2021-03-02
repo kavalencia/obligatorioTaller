@@ -3,8 +3,8 @@
     <div>
         <h1 id='cabezal'>Todo Juegos</h1>
         <form action="/action_page.php">
-            <input type="search" id="gsearch" name="gsearch" placeholder="Search">
-            <input type="submit">
+            <input type="search" id="texto" name="gsearch" placeholder="Search">
+            <input id="buscar" type="submit">
         </form>
     </div>
     <div id="menu_usuario">

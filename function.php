@@ -34,22 +34,62 @@ function getSmarty(){
     return $mySmarty;
 }
 
+function getCantidadConsolasPorJuego($id){
+    $conexion = abrirConexion();  
+    $sql = "SELECT c.nombre 
+            FROM juegos j, juegos_consolas jc, consolas c  
+            WHERE j.id = :id AND j.id = jc.id_juego AND jc.id_consola =c.id";  
+    $conexion->consulta($sql, array(array("id", $id, "int")));
+    return $conexion->restantesRegistros();
+}
 
 function getJuego($id){
-    $conexion = abrirConexion();
+    $conexion = abrirConexion();  
     $sql = "SELECT * FROM juegos WHERE id = :id";
-    $sentencia = $conexion->prepare($sql);
-    $sentencia->bindParam("id", $id, PDO::PARAM_INT);
-    $sentencia->execute();
-    $categoria = $sentencia->fetch(PDO::FETCH_ASSOC);   
-    return $juego;
+    $conexion->consulta($sql, array(array("id", $id, "int")));
+    return $conexion->siguienteRegistro();
 }
 
 
-function getJuegosDeSeleccion(){
+function ultimaPaginaDeJuegos($texto){
+    $conexion = abrirConexion();  
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+    );
+    
+    $sql = "SELECT COUNT(j.id) as total FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto";
+    $conexion->consulta($sql, $params);
+    $size = 8;
+    $fila = $conexion->siguienteRegistro();  
+    $paginas = ceil($fila["total"]/$size) - 1;
+    
+    return $paginas;
+}
+
+
+function getJuegosDeSeleccion($pagina = 0, $texto = ''){
+    $size = 8;
+    $offset = $pagina * $size;
     $conexion = abrirConexion();
-    // "SELECT j.id, j.nombre, g.genero, j.poster, j.puntuacion FROM juegos j, generos g WHERE j.id_genero = g.id";
-    $sql = "SELECT * FROM juegos";
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("offset", $offset, "int"),
+        array("size", $size, "int"),
+    );
+    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto LIMIT :offset, :size";
+    $conexion->consulta($sql, $params);   
+    return $conexion->restantesRegistros();
+}
+
+function getJuegoDestacado(){
+    $conexion = abrirConexion();
+    $sql = "SELECT j.*, COUNT(*) AS cant_comentarios
+            FROM juegos j, comentarios c
+            WHERE j.id = c.id_juego
+            GROUP BY j.id
+            ORDER BY cant_comentarios DESC
+            LIMIT 1";
     $conexion->consulta($sql);    
     return $conexion->restantesRegistros();
 }

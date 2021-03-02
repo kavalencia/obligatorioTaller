@@ -103,6 +103,36 @@ body {
     display: inline;
 }
 
+#contenedorComentarios {
+    display: block;
+    justify-content: center;
+}
+
+#contenedorComentarios h2{
+    display: block;
+    text-align: center
+}
+
+#datosComentarios{
+    display: inline;
+}
+
+.comentario{
+    display: flex;
+    width: 100%;
+    align-content: center;
+}
+
+.comentario #comentarioTexto{
+    display: inline-block;
+    width: 80%;
+}
+
+.comentario #comentarioBotton{
+    display: inline-block;
+    width: 20%;
+}
+
 .ui-form {
     display: block;
 }

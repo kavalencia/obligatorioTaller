@@ -2,16 +2,15 @@
     ini_set('display_errors', 1);
     require_once 'function.php';
 
-    $usuario = $_POST["usuario"];
-    $clave = $_POST["clave"];
+    $comId = $_POST["comId"];
     
-    $usuarioLogueado = login($usuario, $clave);
+    borrarComentario($comId);
     
     if (isset($usuarioLogueado)) {
         session_start();
         $_SESSION['usuarioLogueado'] = $usuarioLogueado;
-        header('location:index.php');
+        header('location:reviewComment.php');
     } else {
-        header('location:login.php?err=1');
+        header('location:reviewComment.php?err=1');
     }
 

@@ -50,7 +50,7 @@ function cargarJuegos(){
         });
         
     }).fail(function(){
-        alert('error!')
+        alert('error!');
     });
 }
 

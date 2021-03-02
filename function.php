@@ -36,20 +36,40 @@ function getSmarty(){
 }
 
 
-
+function getCantidadConsolasPorJuego($id){
+    $conexion = abrirConexion();  
+    $sql = "SELECT c.nombre 
+            FROM juegos j, juegos_consolas jc, consolas c  
+            WHERE j.id = :id AND j.id = jc.id_juego AND jc.id_consola =c.id";  
+    $conexion->consulta($sql, array(array("id", $id, "int")));
+    return $conexion->restantesRegistros();
+}
 
 
 
 function getJuego($id){
-    $conexion = abrirConexion();
+    $conexion = abrirConexion();  
     $sql = "SELECT * FROM juegos WHERE id = :id";
-    $sentencia = $conexion->prepare($sql);
-    $sentencia->bindParam("id", $id, PDO::PARAM_INT);
-    $sentencia->execute();
-    $categoria = $sentencia->fetch(PDO::FETCH_ASSOC);   
-    return $juego;
+    $conexion->consulta($sql, array(array("id", $id, "int")));
+    return $conexion->siguienteRegistro();
 }
 
+function getProducto($id){
+    $conexion = abrirConexion2();
+    $sql = "SELECT * FROM productos WHERE id = :id";
+    $conexion->consulta($sql, array(array("id", $id, "int")));
+    return $conexion->siguienteRegistro();
+    /*$producto = NULL;
+    foreach(getCategorias() as $cat) {
+        foreach(getProductosDeCategoria($cat["id"]) as $prod) {
+            if($prod["id"] == $id) {
+                $producto = $prod;
+            }
+        }
+    }
+   
+    return $producto;*/
+}
 /*
 function getJuego($id){
     $juego = NULL;
@@ -62,11 +82,66 @@ function getJuego($id){
 }
 */
 
-
-function getJuegosDeSeleccion(){
+function getComentarios($pagina = 0, $texto = ''){
+    
+    $size = 3;
+    $offset = $pagina * $size;
     $conexion = abrirConexion();
-    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id";
-    $conexion->consulta($sql);    
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("offset", $offset, "int"),
+        array("size", $size, "int"),
+    );
+    $sql = "SELECT * FROM comentarios WHERE texto LIKE :texto LIMIT :offset, :size";
+    $conexion->consulta($sql, $params);
+    return $conexion->restantesRegistros();    
+}
+
+function ultimaPaginaDeComentarios($texto){
+    
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+    );
+    $sql = "SELECT count(*) as total FROM comentarios WHERE texto LIKE :texto";
+    $conexion->consulta($sql, $params);
+    $fila = $conexion->siguienteRegistro();
+    $size = 3;
+    $paginas = ceil($fila["total"]/$size) - 1;
+    
+    return $paginas;
+}
+
+function ultimaPaginaDeJuegos($texto){
+    $conexion = abrirConexion();  
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+    );
+    
+    $sql = "SELECT COUNT(j.id) as total FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto";
+    $conexion->consulta($sql, $params);
+    $size = 8;
+    $fila = $conexion->siguienteRegistro();  
+    $paginas = ceil($fila["total"]/$size) - 1;
+    
+    return $paginas;
+}
+
+
+function getJuegosDeSeleccion($pagina = 0, $texto = ''){
+    $size = 8;
+    $offset = $pagina * $size;
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("offset", $offset, "int"),
+        array("size", $size, "int"),
+    );
+    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto LIMIT :offset, :size";
+    $conexion->consulta($sql, $params);   
     return $conexion->restantesRegistros();
 }
 

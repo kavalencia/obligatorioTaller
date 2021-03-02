@@ -4,6 +4,9 @@
         <meta charset="utf-8" lang="es">
         <title>TODO JUEGOS</title>
         <link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
+        <script script="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+        <script script="text/javascript" src="./js/main.js"></script>
+        
     </head>
     <body>
 
@@ -17,11 +20,9 @@
             {include file="encabezado.tpl" usuarioLogueado=$usuarioLogueado}
         {/if}
         <div class="titulo-juegos"><a>Juegos</a></div>
-        {foreach from=$destacado item=dest}
-             {include file="destacado.tpl" dest=$dest}
-        {/foreach}
-        
-        {include file="contenedorJuegos.tpl" juegos=$juegos}  
+        {include file="destacado.tpl" dest=$destacado[0]}
+        <div class="filter"> {include file="filters.tpl"} </div> 
+        <div id="contenedorJuegos"> </div>
 
     </body>
 </html> 

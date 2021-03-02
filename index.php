@@ -11,9 +11,8 @@ if(isset($_SESSION['usuarioLogueado'])) {
 
 $mySmarty = getSmarty();
 
-$juegos = getJuegosDeSeleccion();
+
 $destacado = getJuegoDestacado();
-$mySmarty->assign("juegos", $juegos);
 $mySmarty->assign("destacado", $destacado);
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
 $mySmarty->display("index.tpl");

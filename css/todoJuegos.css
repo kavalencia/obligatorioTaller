@@ -116,25 +116,19 @@ body {
 
 #contenedorJuegos{
     display: flex;
-
 }
 
-#juegos {
-    text-align: center;
-    display: inline-block;
-    width: 100%;
-}
 
-#juegos a{
+.tarjeta-juego a{
     flex-row: 4;
 }
 
-#juegos img {
+.tarjeta-juego img{
   float: left;
   width: 100px;
 }
 
-.juego {
+.tarjeta-juego {
     float: left;
     border: 1px solid #CCCCCC;
     margin: 2px;

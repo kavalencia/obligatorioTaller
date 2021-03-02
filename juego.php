@@ -2,6 +2,7 @@
 <?php
     ini_set('display_errors', 1);
     require_once 'function.php';
+    error_reporting(E_ERROR);
 ?>
 <html>
 	<head>
@@ -15,17 +16,13 @@
                     
                     if(isset($_GET["juegId"])) {
                         $juegId = $_GET["juegId"];
-                    }
-                    
+                    }                 
                     $juego = getJuego($juegId);
-                    echo("hola");
+                    $tipoConsolas = getCantidadConsolasPorJuego($juegId);
                     $mySmarty = getSmarty();
-                    $mySmarty->assign("juego", juego);
+                    $mySmarty->assign("juego", $juego);
+                    $mySmarty->assign("tipoConsolas", $tipoConsolas);         
                     $mySmarty->display("juego.tpl");
-                    
-                    
-                    
-                    
                 ?>
 	</body>
 </html>

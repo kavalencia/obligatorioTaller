@@ -2,10 +2,46 @@ body {
     font-family: Arial;
     margin: 0;
 }
+
 *{
     box-sizing: border-box;
 }
 
+#form {
+  width: 250px;
+  margin: 0 auto;
+  height: 50px;
+}
+
+#form p {
+  text-align: left;
+}
+
+#form label {
+  font-size: 20px;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: orange;
+}
+
+.clasificacion {
+  direction: ltr;
+  unicode-bidi: bidi-override;
+}
+
+label:hover,
+label:hover ~ label {
+  color: grey;
+}
+
+input[type="radio"]:checked ~ label {
+  color: grey;
+}
 
 #encabezado {
     text-align: center;

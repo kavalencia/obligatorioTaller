@@ -5,11 +5,19 @@
         <title>TODO JUEGOS</title>
         <link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
         <script script="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
-        <script script="text/javascript" src="./js/main.js"></script>      
+        <script script="text/javascript" src="./js/comentarioJuego.js"></script>      
     </head>
     <body>
-
-        {include file="encabezado.tpl"}
+        {if isset($usuarioLogueado)}
+            {if {$usuarioLogueado.es_admin} == 1}
+                {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
+            {else}
+                {include file="encabezadoUsuarioLogeadoComun.tpl" usuarioLogueado=$usuarioLogueado}
+            {/if}
+        {else}
+            {include file="encabezado.tpl" usuarioLogueado=$usuarioLogueado}
+        {/if}
+        
         {if isset($juego)}
             <h1>{$juego.nombre}</h1>
             <img src="./img/juegosCaratula/{$juego.poster}" alt="logo">
@@ -25,5 +33,7 @@
         {else}
             <p>Juego Inexistente</p>
         {/if} 
+        <div id="comentariosJuegoPagina">
+        </div>
     </body>
 </html> 

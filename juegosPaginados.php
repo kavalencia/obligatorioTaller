@@ -15,7 +15,6 @@ if (isset($_GET['texto'])) {
     $texto = $_GET['texto'];
 }
 
-
 $juegos = getJuegosDeSeleccion($pagina, $texto);
 $ultimaPagina = ultimaPaginaDeJuegos($texto);
 

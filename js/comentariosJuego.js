@@ -1,25 +1,27 @@
 var pagina = 0;
-var texto = "";
+var texto = '';
+var juegoId = 0;
 
-function cargar(){
+function cargarComentariosJuego(){
     $.ajax({
-       url: "comentariosPaginados.php",
+       url: "comentariosJuegoPaginados.php",
        data: {
            pag: pagina,
-           texto: texto
+           texto: texto,
+           juegoId: juegoId
        },
        dataType: "html"
     }).done(function(html){
-        $("#contenedorComentarios").html(html);
+        $("#comentariosJuegoPagina").html(html);
         
         $("#anterior").click(function(){
             pagina -= 1;
-            cargar();
+            cargarComentariosJuego();
         });
         
         $("#siguiente").click(function(){
             pagina += 1;
-            cargar();
+            cargarComentariosJuego();
         });
         
     }).fail(function(){
@@ -32,16 +34,19 @@ $(document).ready(function(){
     $("#buscar").click(function(){
         texto = $("#texto").val();
         pagina = 0;
-        cargar();
+        cargarComentariosJuego();
     });
     
     $("#texto").on('keyup', function(){
         texto = $("#texto").val();
         pagina = 0;
-        cargar();
+        cargarComentariosJuego();
     });
     
     pagina = 0;
-    cargar();
+    let params = new URLSearchParams(location.search);
+    juegoId = params.get('juegId');
+    //juegoId = getParameterByName('juegId');
+    cargarComentariosJuego();
 });
 

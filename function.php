@@ -77,7 +77,11 @@ function getJuegosDeSeleccion($pagina = 0, $texto = ''){
         array("offset", $offset, "int"),
         array("size", $size, "int"),
     );
-    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto LIMIT :offset, :size";
+    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero
+              FROM juegos j, generos g 
+             WHERE j.id_genero = g.id 
+               AND j.nombre LIKE :texto 
+             LIMIT :offset, :size";
     $conexion->consulta($sql, $params);   
     return $conexion->restantesRegistros();
 }
@@ -172,6 +176,49 @@ function getComentarios($pagina = 0, $texto = ''){
     $sql = "SELECT * FROM comentarios WHERE texto LIKE :texto LIMIT :offset, :size";
     $conexion->consulta($sql, $params);
     return $conexion->restantesRegistros();    
+}
+
+function getComentariosDeJuego($pagina = 0, $texto = '', $juegoId){
+    
+    $size = 3;
+    $offset = $pagina * $size;
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("offset", $offset, "int"),
+        array("size", $size, "int"),
+        array("juegoId", $juegoId, "int"),
+    );
+    $sql = "SELECT *
+              FROM comentarios 
+             WHERE texto 
+              LIKE :texto
+              and id_juego = :juegoId
+             LIMIT :offset, :size";
+    $conexion->consulta($sql, $params);
+    return $conexion->restantesRegistros();    
+}
+
+function ultimaPaginaDeComentariosDelJuego($texto, $juegoId){
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("juegoId", $juegoId, "int"),
+    );
+    $sql = "SELECT count(*) as total
+              FROM comentarios 
+             WHERE texto 
+              LIKE :texto
+              and id_juego = :juegoId";
+    
+    $conexion->consulta($sql, $params);
+    $fila = $conexion->siguienteRegistro();
+    $size = 8;
+    $paginas = ceil($fila["total"] / $size) - 1;
+    
+    return $paginas;
 }
 
 function ultimaPaginaDeComentarios($texto){

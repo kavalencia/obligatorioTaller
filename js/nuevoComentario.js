@@ -17,14 +17,11 @@ function cargarComentarioYPuntaje(){
         $("#comentarioYPuntuacion").html(html);
         
         $("input[name=estrellas]").click(function () {    
-            alert("La estrella seleccionada es: " + $(this).val());
             puntaje = $(this).val();
         });
         
         $("#buttonComPun").click(function(){
-            alert("El valor de la estrella seleccionada es: " + puntaje);
             com = $("#nuevoCom").val();
-            alert("El valor del comentario ingresado es: "+ com);
             inicio = 0;
             cargarComentarioYPuntaje();
         });
@@ -37,7 +34,6 @@ function cargarComentarioYPuntaje(){
 $(document).ready(function(){
     let params = new URLSearchParams(location.search);
     juegoId = params.get('juegId');
-    alert("Cargue la web: ");
     cargarComentarioYPuntaje();
 });
 

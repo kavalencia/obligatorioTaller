@@ -3,8 +3,10 @@
     require_once 'function.php';
 
     $comId = $_POST["comId"];
+    $juegoId = $_POST["juegoId"];
     
     borrarComentario($comId);
+    updatePuntuacionJuego($juegoId);
     
     if (isset($usuarioLogueado)) {
         session_start();

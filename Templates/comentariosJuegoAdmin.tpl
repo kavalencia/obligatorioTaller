@@ -3,9 +3,10 @@
         {$com.texto}
     </div>
     <div id="comentarioBoton">
-        <form action="borrarComentario.php" method="POST">
+        <form action="borrarComentarioJuego.php" method="POST">
             <input type="hidden" name="comId" value="{$com.id}"></input>
-            <input type="submit" value="Borrar" />
+            <input type="hidden" name="juegoId" value="{$com.id_juego}"></input>
+            <input id="botonBorrar" type="submit" value="Borrar" />
         </form>
     </div>
 </div>

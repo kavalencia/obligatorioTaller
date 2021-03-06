@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <?php
     ini_set('display_errors', 1);
     require_once 'function.php';
@@ -10,6 +9,7 @@
 		<title>Tu Tienda Online</title>
 		<link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
                 <script script="text/javascript" src="./js/jquery-3.5.1.min.js"></script>
+                <script script="text/javascript" src="./js/nuevoComentario.js"></script>
                 <script script="text/javascript" src="./js/comentariosJuego.js"></script>
 	</head>
 	<body>
@@ -36,3 +36,4 @@
                 ?>
 	</body>
 </html>
+

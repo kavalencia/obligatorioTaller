@@ -8,7 +8,7 @@ function cargarComentariosJuego(){
        data: {
            pag: pagina,
            texto: texto,
-           juegoId: juegoId
+           juegoId: juegoId,
        },
        dataType: "html"
     }).done(function(html){
@@ -30,7 +30,7 @@ function cargarComentariosJuego(){
 }
 
 $(document).ready(function(){
-    
+   
     $("#buscar").click(function(){
         texto = $("#texto").val();
         pagina = 0;
@@ -46,7 +46,6 @@ $(document).ready(function(){
     pagina = 0;
     let params = new URLSearchParams(location.search);
     juegoId = params.get('juegId');
-    //juegoId = getParameterByName('juegId');
     cargarComentariosJuego();
 });
 

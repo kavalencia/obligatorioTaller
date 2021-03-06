@@ -26,22 +26,23 @@ input[type="radio"] {
 }
 
 label {
-  color: orange;
+  color: grey;
 }
 
-.clasificacion {
-  direction: ltr;
+.puntaje {
+  direction: rtl;
   unicode-bidi: bidi-override;
 }
 
 label:hover,
 label:hover ~ label {
-  color: grey;
+  color: orange;
 }
 
 input[type="radio"]:checked ~ label {
-  color: grey;
+  color: orange;
 }
+
 
 #encabezado {
     text-align: center;

@@ -14,7 +14,15 @@
         "urlVideo" => $_POST["video_yoputube"],
         "resumen" => $_POST["resumen"],
         "listaConsolas" => $_POST["lista_consolas"]);
-      
+        
     insertarJuego($juego);
-    header('location:addGame.php');
+    
+    $imagen = $_FILE['imagen_juego'];
+   
+    if(is_uploaded_file($imagen['tmp_name'])){
+        move_uploaded_file($imagen['tmp_name'], 'img/'.$id.'png');
+    }
+        
+        
+        header('location:addGame.php');
     

@@ -5,7 +5,7 @@ require_once 'function.php';
 
 session_start();
 $usuarioLogueado = NULL;
-if(isset($_SESSION['usuarioLogueado'])) {
+if (isset($_SESSION['usuarioLogueado'])) {
     $usuarioLogueado = $_SESSION['usuarioLogueado'];
 }
 

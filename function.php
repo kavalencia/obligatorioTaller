@@ -121,7 +121,7 @@ function getJuegosDeSeleccion($pagina = 0, $texto = '', $orden, $genero, $consol
         $columna = "visualizaciones";
         $sql = $sql . " ORDER BY " . $columna . " DESC" . $sqlLimit;
     }
-    
+   
     $conexion->consulta($sql, $params);   
     return $conexion->restantesRegistros();
 }
@@ -190,16 +190,44 @@ function insertarJuego($juego) {
     );
     $sql = "INSERT INTO Juegos(nombre, id_genero, poster, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :poster, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
     $conexion->consulta($sql, $params);
+    return $conexion->ultimoIdInsert();
+}
+
+function updatePuntuacionJuego($juegoId){
+    
+    $conexion = abrirConexion();
+    $params = array(
+        array("juegoId", $juegoId, "int")
+    );
+    $sql = "UPDATE juegos SET puntuacion = (SELECT AVG(puntuacion) FROM comentarios WHERE id_juego = :juegoId) WHERE id = :juegoId";
+    $conexion->consulta($sql, $params);
+    return $conexion->ultimoIdInsert();
+}
+
+function insertComentarioJuego($com, $puntaje, $juegoId, $usuario){
+    $conexion = abrirConexion();  
+    
+    $params = array(
+        array("id_usuario", $usuario, "int"),
+        array("id_juego", $juegoId, "int"),
+        array("texto", $com, "string"),
+        array("puntuacion", $puntaje, "int"),
+    );
+    
+    $sql = "INSERT INTO comentarios(id_usuario, id_juego, texto, fecha, puntuacion) VALUES(:id_usuario, :id_juego, :texto, now(), :puntuacion)";
+    $conexion->consulta($sql, $params);
+    
+    return $conexion->ultimoIdInsert();
 }
 
 function borrarComentario($comId){
     $conexion = abrirConexion();
+    
     $params = array(
         array("comId", $comId, "int"),
     );
     $sql = "DELETE FROM comentarios WHERE id = :comId";
     $conexion->consulta($sql, $params);
-    return $conexion->restantesRegistros(); 
 }
 
 function getComentarios($pagina = 0, $texto = ''){
@@ -216,6 +244,50 @@ function getComentarios($pagina = 0, $texto = ''){
     $sql = "SELECT * FROM comentarios WHERE texto LIKE :texto LIMIT :offset, :size";
     $conexion->consulta($sql, $params);
     return $conexion->restantesRegistros();    
+}
+
+function getComentariosDeJuego($pagina = 0, $texto = '', $juegoId){
+    
+    $size = 5;
+    $offset = $pagina * $size;
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("offset", $offset, "int"),
+        array("size", $size, "int"),
+        array("juegoId", $juegoId, "int"),
+    );
+    $sql = "SELECT *
+              FROM comentarios 
+             WHERE texto 
+              LIKE :texto
+              AND id_juego = :juegoId
+         ORDER BY fecha desc 
+             LIMIT :offset, :size";
+    $conexion->consulta($sql, $params);
+    return $conexion->restantesRegistros();    
+}
+
+function ultimaPaginaDeComentariosDelJuego($texto, $juegoId){
+    $conexion = abrirConexion();
+    
+    $params = array(
+        array("texto", '%'.$texto.'%', "string"),
+        array("juegoId", $juegoId, "int"),
+    );
+    $sql = "SELECT count(*) as total
+              FROM comentarios 
+             WHERE texto 
+              LIKE :texto
+              and id_juego = :juegoId";
+    
+    $conexion->consulta($sql, $params);
+    $fila = $conexion->siguienteRegistro();
+    $size = 5;
+    $paginas = ceil($fila["total"] / $size) - 1;
+    
+    return $paginas;
 }
 
 function ultimaPaginaDeComentarios($texto){

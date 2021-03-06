@@ -8,7 +8,6 @@
         
     </head>
     <body>
-
         {if isset($usuarioLogueado)}
             {if {$usuarioLogueado.es_admin} == 1}
                 {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
@@ -22,6 +21,5 @@
         {include file="destacado.tpl" dest=$destacado[0]}
         <div class="filter"> {include file="filters.tpl"} </div> 
         <div id="contenedorJuegos"> </div>
-
     </body>
 </html> 

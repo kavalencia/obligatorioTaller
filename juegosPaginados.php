@@ -15,6 +15,7 @@ if (isset($_GET['texto'])) {
     $texto = $_GET['texto'];
 }
 
+
 $orden = "normal";
 if(isset($_GET['orden'])){
     $orden = $_GET['orden'];
@@ -33,9 +34,6 @@ if(isset($_GET['consola'])){
  
 $juegos = getJuegosDeSeleccion($pagina, $texto, $orden, $genero, $consola);
 $ultimaPagina = ultimaPaginaDeJuegos($texto, $genero, $consola);
-
-
-
 
 $mySmarty->assign("juegos", $juegos);
 $mySmarty->assign("pagina", $pagina);

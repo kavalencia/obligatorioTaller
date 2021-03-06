@@ -15,8 +15,27 @@
         $texto = $_GET['texto'];
     }
     
-    $comentarios = getComentarios($pagina, $texto);
+    $juegoId = 0;
+    if(isset($_GET['juegoId'])){
+        $juegoId = $_GET['juegoId'];
+    }
     
+    $comId = "";
+    if(isset($_GET['comId'])){
+        $comId = $_GET['comId'];
+    }
+    
+    $borrar = "0";
+    if(isset($_GET['borrar'])){
+        $borrar = $_GET['borrar'];
+    }
+
+    if(borrar == "1"){
+        borrarComentario($comId);
+        updatePuntuacionJuego($juegoId);
+    }
+    
+    $comentarios = getComentarios($pagina, $texto);
     $ultimaPagina = ultimaPaginaDeComentarios($texto);
     
     $mySmarty->assign("comentarios", $comentarios);

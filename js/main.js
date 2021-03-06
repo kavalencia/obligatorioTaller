@@ -89,6 +89,6 @@ $(document).ready(function(){
         consola = $("#consola").val();
         cargarJuegos();
     });
-    
-    cargarJuegos();
+
+  cargarJuegos();
 });

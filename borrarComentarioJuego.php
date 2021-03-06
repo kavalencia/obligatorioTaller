@@ -1,6 +1,7 @@
 <?php
     ini_set('display_errors', 1);
     require_once 'function.php';
+    error_reporting(E_ERROR);
 
     $comId = $_POST["comId"];
     $juegoId = $_POST["juegoId"];
@@ -9,10 +10,7 @@
     updatePuntuacionJuego($juegoId);
     
     if (isset($usuarioLogueado)) {
-        session_start();
+        //session_start();
         $_SESSION['usuarioLogueado'] = $usuarioLogueado;
-        header('location:reviewComment.php');
-    } else {
-        header('location:reviewComment.php?err=1');
     }
-
+    header('location:juego.php?juegId='.$juegoId);

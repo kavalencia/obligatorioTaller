@@ -51,13 +51,18 @@ function getJuego($id){
 }
 
 
-function ultimaPaginaDeJuegos($texto){
+function ultimaPaginaDeJuegos($texto, $genero, $consola){
     $conexion = abrirConexion();  
     $params = array(
         array("texto", '%'.$texto.'%', "string"),
     );
-    
-    $sql = "SELECT COUNT(j.id) as total FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto";
+    $sql = "SELECT COUNT(DISTINCT (j.id)) AS total FROM juegos j, generos g, consolas c, juegos_consolas jc  WHERE j.id_genero = g.id AND j.id = jc.id_juego AND jc.id_consola = c.id AND (j.nombre LIKE :texto OR g.nombre LIKE :texto OR c.nombre LIKE :texto)";
+    if($genero != 0){
+      $sql =  $sql . " AND g.id = " . $genero;
+    }
+    if($consola != 0){
+      $sql =  $sql . " AND c.id = " . $consola;
+    }
     $conexion->consulta($sql, $params);
     $size = 8;
     $fila = $conexion->siguienteRegistro();  
@@ -67,17 +72,56 @@ function ultimaPaginaDeJuegos($texto){
 }
 
 
-function getJuegosDeSeleccion($pagina = 0, $texto = ''){
+function getJuegosDeSeleccion($pagina = 0, $texto = '', $orden, $genero, $consola){
     $size = 8;
     $offset = $pagina * $size;
-    $conexion = abrirConexion();
-    
+    $conexion = abrirConexion();  
     $params = array(
         array("texto", '%'.$texto.'%', "string"),
         array("offset", $offset, "int"),
         array("size", $size, "int"),
     );
-    $sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g WHERE j.id_genero = g.id AND j.nombre LIKE :texto LIMIT :offset, :size";
+    
+    $sql = "SELECT DISTINCT(j.id), j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g, consolas c, juegos_consolas jc  WHERE j.id_genero = g.id AND j.id = jc.id_juego AND jc.id_consola = c.id AND j.nombre LIKE :texto";
+    //$sql = "SELECT j.id, j.nombre, j.poster, j.puntuacion, g.nombre as genero FROM juegos j, generos g, consolas c, juegos_consolas jc  WHERE j.id_genero = g.id AND j.id = jc.id_juego AND jc.id_consola = c.id AND (j.nombre LIKE :texto OR g.nombre LIKE :texto OR c.nombre LIKE :texto)";
+    
+    $sqlLimit = " LIMIT :offset, :size";
+    
+
+    if($genero != 0){
+      $sql =  $sql . " AND g.id = " . $genero;
+    }
+    if($consola != 0){
+      $sql =  $sql . " AND c.id = " . $consola;
+    }
+    if($orden == "normal"){
+        $sql = $sql . $sqlLimit;
+    }
+    if($orden == "lanzamientoAsc"){
+        $columna = "fecha_lanzamiento";
+        $sql = $sql . " ORDER BY " . $columna . " ASC" . $sqlLimit;
+    }
+    else if($orden == "lanzamientoDesc"){
+        $columna = "fecha_lanzamiento";
+        $sql = $sql . " ORDER BY " . $columna . " DESC" . $sqlLimit;
+    }
+    else if($orden == "puntajeAsc"){
+        $columna = "puntuacion";
+        $sql = $sql . " ORDER BY " . $columna . " ASC" . $sqlLimit;
+    }
+    else if($orden == "puntajeDesc"){
+        $columna = "puntuacion";
+        $sql = $sql . " ORDER BY " . $columna . " DESC" . $sqlLimit;
+    }
+    else if($orden == "cantVisualizacionesAsc"){
+        $columna = "visualizaciones";
+        $sql = $sql . " ORDER BY " . $columna . " ASC" . $sqlLimit;
+    }
+    else if ($orden == "cantVisualizacionesDesc"){
+        $columna = "visualizaciones";
+        $sql = $sql . " ORDER BY " . $columna . " DESC" . $sqlLimit;
+    }
+    
     $conexion->consulta($sql, $params);   
     return $conexion->restantesRegistros();
 }

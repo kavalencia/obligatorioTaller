@@ -15,9 +15,27 @@ if (isset($_GET['texto'])) {
     $texto = $_GET['texto'];
 }
 
+$orden = "normal";
+if(isset($_GET['orden'])){
+    $orden = $_GET['orden'];
+}
 
-$juegos = getJuegosDeSeleccion($pagina, $texto);
-$ultimaPagina = ultimaPaginaDeJuegos($texto);
+
+$genero = "0";
+if(isset($_GET['genero'])){
+    $genero = $_GET['genero'];
+}
+
+$consola = "0";
+if(isset($_GET['consola'])){
+    $consola = $_GET['consola'];
+}
+ 
+$juegos = getJuegosDeSeleccion($pagina, $texto, $orden, $genero, $consola);
+$ultimaPagina = ultimaPaginaDeJuegos($texto, $genero, $consola);
+
+
+
 
 $mySmarty->assign("juegos", $juegos);
 $mySmarty->assign("pagina", $pagina);

@@ -8,7 +8,7 @@
 	<head>
 		<meta charset="utf-8" lang="es">
 		<title>Tu Tienda Online</title>
-		<link rel="stylesheet" href="./css/ventas.css" type="text/css">
+                <link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
 	</head>
 	<body>
 		<?php 

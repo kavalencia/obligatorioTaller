@@ -1,39 +1,18 @@
-var pagina = 0;
+var pagina = "0";
 var texto = "";
-
-function cargar(){
-    $.ajax({
-       url: "comentariosPaginados.php",
-       data: {
-           pag: pagina,
-           texto: texto
-       },
-       dataType: "html"
-    }).done(function(html){
-        alert('entre a done');
-        $("#contenedorComentarios").html(html);
-        
-        $("#anterior").click(function(){
-            pagina -= 1;
-            cargar();
-        });
-        
-        $("#siguiente").click(function(){
-            pagina += 1;
-            cargar();
-        });
-        
-    }).fail(function(){
-        alert('error!')
-    });
-}
+var orden = "normal";
+var genero = "0";
+var consola = "0";
 
 function cargarJuegos(){
     $.ajax({
        url: "juegosPaginados.php",
        data: {
            pag: pagina,
-           texto: texto
+           texto: texto,
+           orden: orden,
+           genero: genero,
+           consola: consola
        },
        dataType: "html"
     }).done(function(html){
@@ -41,11 +20,17 @@ function cargarJuegos(){
         
         $("#anterior").click(function(){
             pagina -= 1;
+            orden = $("#orden").val();
+            genero = $("#genero").val();
+            consola = $("#consola").val();
             cargarJuegos();
         });
         
         $("#siguiente").click(function(){
             pagina += 1;
+            orden = $("#orden").val();
+            genero = $("#genero").val();
+            consola = $("#consola").val();
             cargarJuegos();
         });
         
@@ -57,21 +42,53 @@ function cargarJuegos(){
 $(document).ready(function(){
     $(".revisionComentarios").click(function(){
         pagina = 0;
-        cargar();
+        orden = $("#orden").val();
+        genero = $("#genero").val();
+        consola = $("#consola").val();
+        cargarJuegos();
     });
     
-    $("#buscar").click(function(){
-        texto = $("#texto").val();
+    $("#orden").click(function(){
         pagina = 0;
+        orden = $("#orden").val();
+        genero = $("#genero").val();
+        consola = $("#consola").val();
+        cargarJuegos();
+    });
+    
+    $("#genero").click(function(){
+        pagina = 0;
+        orden = $("#orden").val();
+        genero = $("#genero").val();
+        consola = $("#consola").val();
+        cargarJuegos();
+    });
+    
+    $("#consola").click(function(){
+        pagina = 0;
+        orden = $("#orden").val();
+        genero = $("#genero").val();
+        consola = $("#consola").val();
+        cargarJuegos();
+    });
+     
+    $("#buscar").click(function(){
+        pagina = 0;
+        texto = $("#texto").val();
+        orden = $("#orden").val();
+        genero = $("#genero").val(); 
+        consola = $("#consola").val();
         cargarJuegos();
     });
     
     $("#texto").on('keyup', function(){
-        texto = $("#texto").val();
         pagina = 0;
+        texto = $("#texto").val();
+        orden = $("#orden").val();
+        genero = $("#genero").val();
+        consola = $("#consola").val();
         cargarJuegos();
     });
     
-    //cargar();
     cargarJuegos();
 });

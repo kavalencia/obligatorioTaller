@@ -10,7 +10,6 @@ if (isset($_SESSION['usuarioLogueado'])) {
 }
 
 $mySmarty = getSmarty();
-
 $destacado = getJuegoDestacado();
 $mySmarty->assign("destacado", $destacado);
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);

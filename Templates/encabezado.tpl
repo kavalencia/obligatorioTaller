@@ -2,10 +2,7 @@
     <img id="img_logo" src="./img/logo.png" alt="">
     <div>
         <h1 id='cabezal'>Todo Juegos</h1>
-        <form action="/action_page.php">
-            <input type="search" id="texto" name="gsearch" placeholder="Search">
-            <input id="buscar" type="submit">
-        </form>
+        {include file="searchFilters.tpl"}
     </div>
     <div id="menu_usuario">
         <a href="register.php">Registrarse</a>

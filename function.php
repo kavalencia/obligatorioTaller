@@ -1,12 +1,14 @@
 <?php
-
+require 'Config/configuracion.php';
 ini_set('display_errors', 1);
 require_once 'class.Conexion.BD.php';
 require_once './libs/Smarty.class.php';
 
 function abrirConexion2() {
-    $usuario = "root";
-    $clave="root";
+    $usuario = DB_USR;
+    $clave = DB_PASS;
+    var_dump($usuario);
+    var_dump($clave);
     
     $conexion = new PDO("mysql:host=localhost;dbname=catalogo_juegos", $usuario, $clave);
     
@@ -14,8 +16,8 @@ function abrirConexion2() {
 }
 
 function abrirConexion() {
-    $usuario = "root";
-    $clave="root";
+    $usuario = DB_USR;
+    $clave = DB_PASS;
     
     $conexion = new ConexionBD("mysql", "localhost", "catalogo_juegos", $usuario, $clave);
     

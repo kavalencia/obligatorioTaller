@@ -56,7 +56,7 @@ $(document).ready(function(){
         cargarJuegos();
     });
     
-    $("#genero").click(function(){
+    $("#genero").change(function(){
         pagina = 0;
         orden = $("#orden").val();
         genero = $("#genero").val();
@@ -64,7 +64,7 @@ $(document).ready(function(){
         cargarJuegos();
     });
     
-    $("#consola").click(function(){
+    $("#consola").change(function(){
         pagina = 0;
         orden = $("#orden").val();
         genero = $("#genero").val();

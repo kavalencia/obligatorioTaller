@@ -14,7 +14,9 @@
 	</head>
 	<body>
 		<?php 
-                    $juegId = 1;
+                    
+                
+                $juegId = 1;
                     
                     if(isset($_GET["juegId"])) {
                         $juegId = $_GET["juegId"];
@@ -26,6 +28,9 @@
                         $usuarioLogueado = $_SESSION['usuarioLogueado'];
                     }
                     
+                 
+                    $juego = getJuego($juegId);
+                    aumnetarCantidadVisita($juegId, $juego['visualizaciones']);
                     $juego = getJuego($juegId);
                     $tipoConsolas = getCantidadConsolasPorJuego($juegId);
                     $mySmarty = getSmarty();

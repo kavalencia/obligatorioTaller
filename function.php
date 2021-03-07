@@ -34,6 +34,21 @@ function getSmarty(){
     return $mySmarty;
 }
 
+
+function aumnetarCantidadVisita($id, $visualizaciones){
+    $visualizaciones++;
+    var_dump($visualizaciones);
+    var_dump($visualizaciones);
+    $conexion = abrirConexion();
+    $params = array(
+        array("id", $id, "int"),
+        array("visualizaciones", $visualizaciones, "int")
+    );
+    $sql = "UPDATE juegos SET visualizaciones = :visualizaciones WHERE id = :id";  
+    $conexion->consulta($sql, $params);
+    return $conexion->ultimoIdInsert();
+}
+
 function getCantidadConsolasPorJuego($id){
     $conexion = abrirConexion();  
     $sql = "SELECT c.nombre 

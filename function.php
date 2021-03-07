@@ -203,24 +203,35 @@ function logout() {
 }
 
 function insertarJuego($juego) {
-   var_dump($juego);
-   
- 
+    var_dump($juego);
+
     $conexion = abrirConexion();
     $params = array(
         array("nombre", $juego["nombre"], "string"),
         array("id_genero", $juego["id_genero"], "int"),
-        array("puntuacion", $juego["puntuacion"], "int"),
-        array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "date"),
+        array("puntuacion", "0", "int"),
+        array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "string"),
         array("empresa", $juego["empresa"], "string"),
         array("visualizaciones", $juego["visualizaciones"], "int"),
         array("url_video", $juego["url_video"], "string"),
         array("resumen", $juego["resumen"], "string"),
     );
-    $sql = "INSERT INTO Juegos(nombre, id_genero, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
+    $sql = "INSERT INTO juegos (nombre, id_genero, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :puntuacion, :fecha_lanzamiento, :empresa, :visualizaciones, :url_video, :resumen)";
     $conexion->consulta($sql, $params);
     var_dump($conexion->ultimoIdInsert());
     return $conexion->ultimoIdInsert();
+}
+
+function update_ruta_imagen($idJuego, $ruta_imagen){
+    $conexion = abrirConexion();
+    $params = array(
+        array("idJuego", $idJuego, "int"),
+        array("ruta_imagen", $ruta_imagen, "string")
+     );
+    $sql = "UPDATE juegos SET poster = :ruta_imagen WHERE id = :idJuego";
+    $conexion->consulta($sql, $params);
+    return $conexion->ultimoIdInsert();
+    
 }
 
 function updatePuntuacionJuego($juegoId){

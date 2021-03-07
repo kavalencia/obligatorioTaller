@@ -12,6 +12,6 @@
             <a href="register.php">Registrarse</a>
             <a href="login.php">Iniciar sesion</a>
         {/if}
-        <!--img id="img_user" src="./img/usuario.png" alt=""-->
+        
     </div>
 </div>

@@ -203,12 +203,13 @@ function logout() {
 }
 
 function insertarJuego($juego) {
-    
-    $conexion = abrirConexion2();
+   var_dump($juego);
+   
+ 
+    $conexion = abrirConexion();
     $params = array(
         array("nombre", $juego["nombre"], "string"),
         array("id_genero", $juego["id_genero"], "int"),
-        array("poster", $juego["poster"], "string"),
         array("puntuacion", $juego["puntuacion"], "int"),
         array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "date"),
         array("empresa", $juego["empresa"], "string"),
@@ -216,8 +217,9 @@ function insertarJuego($juego) {
         array("url_video", $juego["url_video"], "string"),
         array("resumen", $juego["resumen"], "string"),
     );
-    $sql = "INSERT INTO Juegos(nombre, id_genero, poster, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :poster, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
+    $sql = "INSERT INTO Juegos(nombre, id_genero, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
     $conexion->consulta($sql, $params);
+    var_dump($conexion->ultimoIdInsert());
     return $conexion->ultimoIdInsert();
 }
 

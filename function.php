@@ -333,3 +333,21 @@ function ultimaPaginaDeComentarios($texto){
     
     return $paginas;
 }
+
+function obtenerGeneros(){
+    $conexion = abrirConexion();
+    
+    $sql = "SELECT id, nombre FROM generos";
+    $conexion->consulta($sql);
+
+    return $conexion->restantesRegistros();
+        
+}
+
+function obtenerConsolas(){
+    $conexion = abrirConexion();
+    
+    $sql = "SELECT id, nombre FROM consolas";
+    $conexion->consulta($sql);
+    return $conexion->restantesRegistros();
+}

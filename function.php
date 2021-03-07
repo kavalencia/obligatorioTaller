@@ -35,10 +35,8 @@ function getSmarty(){
 }
 
 
-function aumnetarCantidadVisita($id, $visualizaciones){
+function aumentarCantidadVisita($id, $visualizaciones){
     $visualizaciones++;
-    var_dump($visualizaciones);
-    var_dump($visualizaciones);
     $conexion = abrirConexion();
     $params = array(
         array("id", $id, "int"),
@@ -47,6 +45,19 @@ function aumnetarCantidadVisita($id, $visualizaciones){
     $sql = "UPDATE juegos SET visualizaciones = :visualizaciones WHERE id = :id";  
     $conexion->consulta($sql, $params);
     return $conexion->ultimoIdInsert();
+}
+
+function getTieneComentarioParaJuego($juegoId, $usuarioId){
+    $conexion = abrirConexion(); 
+    $params = array(
+        array("juegoId", $juegoId, "int"),
+        array("usuarioId", $usuarioId, "int"),
+    );
+    $sql = "SELECT COUNT(*)
+            FROM comentarios c 
+            WHERE c.id_juego = :juegoId AND c.id_usuario = :usuarioId";  
+    $conexion->consulta($sql, $params);
+    return ($conexion->restantesRegistros() != 0);
 }
 
 function getCantidadConsolasPorJuego($id){

@@ -5,8 +5,13 @@
         {include file="searchFilters.tpl"}
     </div>
     <div id="menu_usuario">
-        <a href="register.php">Registrarse</a>
-        <a href="login.php">Iniciar sesion</a>
+        {if isset($usuarioLogueado)}
+            Hola {$usuarioLogueado.alias}
+            <a href="./dologout.php">Cerrar Sesion</a>
+        {else}
+            <a href="register.php">Registrarse</a>
+            <a href="login.php">Iniciar sesion</a>
+        {/if}
         <!--img id="img_user" src="./img/usuario.png" alt=""-->
     </div>
 </div>

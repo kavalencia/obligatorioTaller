@@ -1,66 +1,19 @@
 <!DOCTYPE html>
 <?php 
     ini_set('display_errors', 1);
+    require_once 'function.php';
+
+    $usuarioLogueado = NULL;
+    $error = NULL;
+    if(isset($_SESSION['usuarioLogeado'])) {
+        $usuarioLogueado = $_SESSION[usuarioLogueado];
+    }
+    if(isset($_GET['err'])){
+        $error = $_GET['err'];
+    }
+
+    $mySmarty = getSmarty();
+    $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
+    $mySmarty->assign("error", $error);
+    $mySmarty->display("login.tpl");
 ?>
-<html>
-	<head>
-		<meta charset="utf-8" lang="es">
-		<title>TODO JUEGOS</title>
-		<link rel="stylesheet" href="./css/todoJuegos.css" type="text/css">
-	</head>
-	<body>
-		<!-- Página inicial de logeo -->
-		<div id="encabezado">
-			<img id="img_logo" src="./img/logo.png" alt="">
-                        <?php echo("<h1 id='cabezal'>"."Todo Juegos"."</h1>")  ?>
-                        <div id="menu_usuario">
-                        </div>      
-                        
-                        <?php echo("<h2 id='cabezal'>"."Ingrese sus datos"."</h2>") ?>  
-                        
-                        
-		</div>
-                <div id="logearse">
-                    
-                    <div id="container-principal">
-                        <a>Logearse</a>
-                        <div id="container">
-                            <label class="form-control-textfield-register-input">
-                                <div class="form-control-control" >
-                                    <span class="form-control-label">Email</span>
-                                    <input type="text" valueId="email" name="email" maxlength="30">
-                                </div>
-                                <div class="form-control-border">
-                                    <span class="form-control-message">Asegurate de tener acceso a este email</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div id="container">
-                            <label class="form-control-textfield-register-input">
-                                <div class="form-control-control" >
-                                    <span class="form-control-label">Alias</span>
-                                    <input type="text" valueId="alias" name="alias" maxlength="20">
-                                </div>
-                                <div class="form-control-border">
-                                    <span class="form-control-message">Con este alias te identificaras cuando estes logeado</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div id="pass-container">
-                            <label class="form-control-textfield-register-input">
-                                <div class="form-control-control" >
-                                    <span class="form-control-label">Contraseña</span>
-                                    <input type="password" value id="password" name="password" maxlength="20">
-                                </div>
-                                <div class="form-control-border">
-                                    <span class="form-control-message">Usa entre 6 y 20 caracteres</span>
-                                </div>
-                            </label>
-                        </div>
-                        <div class="ui-form">
-                            <button type="submit" class="button-submit">Registrarse</button>
-                        <a</div>
-                    </div>
-                    
-                </div>
-	</body>

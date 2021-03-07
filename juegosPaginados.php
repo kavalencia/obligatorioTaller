@@ -32,6 +32,9 @@ if(isset($_GET['consola'])){
     $consola = $_GET['consola'];
 }
  
+var_dump("Consola"+$consola);
+var_dump("Genero"+$genero);
+
 $juegos = getJuegosDeSeleccion($pagina, $texto, $orden, $genero, $consola);
 $ultimaPagina = ultimaPaginaDeJuegos($texto, $genero, $consola);
 

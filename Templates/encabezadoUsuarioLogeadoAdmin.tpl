@@ -16,9 +16,6 @@
                 <a href="login.php">Iniciar sesion</a>
             {/if}
         </div>
-        <!--div id="img_admin">
-            <img id="img_user" src="./img/usuario.png" alt="">
-        </div-->
     </div>
 </div>
 

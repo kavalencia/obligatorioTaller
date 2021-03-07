@@ -1,12 +1,14 @@
 <?php
-
+require 'Config/configuracion.php';
 ini_set('display_errors', 1);
 require_once 'class.Conexion.BD.php';
 require_once './libs/Smarty.class.php';
 
 function abrirConexion2() {
-    $usuario = "root";
-    $clave="root";
+    $usuario = DB_USR;
+    $clave = DB_PASS;
+    var_dump($usuario);
+    var_dump($clave);
     
     $conexion = new PDO("mysql:host=localhost;dbname=catalogo_juegos", $usuario, $clave);
     
@@ -14,8 +16,8 @@ function abrirConexion2() {
 }
 
 function abrirConexion() {
-    $usuario = "root";
-    $clave="root";
+    $usuario = DB_USR;
+    $clave = DB_PASS;
     
     $conexion = new ConexionBD("mysql", "localhost", "catalogo_juegos", $usuario, $clave);
     
@@ -35,10 +37,8 @@ function getSmarty(){
 }
 
 
-function aumnetarCantidadVisita($id, $visualizaciones){
+function aumentarCantidadVisita($id, $visualizaciones){
     $visualizaciones++;
-    var_dump($visualizaciones);
-    var_dump($visualizaciones);
     $conexion = abrirConexion();
     $params = array(
         array("id", $id, "int"),
@@ -47,6 +47,19 @@ function aumnetarCantidadVisita($id, $visualizaciones){
     $sql = "UPDATE juegos SET visualizaciones = :visualizaciones WHERE id = :id";  
     $conexion->consulta($sql, $params);
     return $conexion->ultimoIdInsert();
+}
+
+function getTieneComentarioParaJuego($juegoId, $usuarioId){
+    $conexion = abrirConexion(); 
+    $params = array(
+        array("juegoId", $juegoId, "int"),
+        array("usuarioId", $usuarioId, "int"),
+    );
+    $sql = "SELECT COUNT(*)
+            FROM comentarios c 
+            WHERE c.id_juego = :juegoId AND c.id_usuario = :usuarioId";  
+    $conexion->consulta($sql, $params);
+    return ($conexion->restantesRegistros() != 0);
 }
 
 function getCantidadConsolasPorJuego($id){
@@ -190,22 +203,35 @@ function logout() {
 }
 
 function insertarJuego($juego) {
-    
-    $conexion = abrirConexion2();
+    var_dump($juego);
+
+    $conexion = abrirConexion();
     $params = array(
         array("nombre", $juego["nombre"], "string"),
         array("id_genero", $juego["id_genero"], "int"),
-        array("poster", $juego["poster"], "string"),
-        array("puntuacion", $juego["puntuacion"], "int"),
-        array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "date"),
+        array("puntuacion", "0", "int"),
+        array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "string"),
         array("empresa", $juego["empresa"], "string"),
         array("visualizaciones", $juego["visualizaciones"], "int"),
         array("url_video", $juego["url_video"], "string"),
         array("resumen", $juego["resumen"], "string"),
     );
-    $sql = "INSERT INTO Juegos(nombre, id_genero, poster, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :poster, :puntuacion, :fecha_lanzamiento, :empresa, :visualizacines, :url_video, :resumen)";
+    $sql = "INSERT INTO juegos (nombre, id_genero, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :puntuacion, :fecha_lanzamiento, :empresa, :visualizaciones, :url_video, :resumen)";
+    $conexion->consulta($sql, $params);
+    var_dump($conexion->ultimoIdInsert());
+    return $conexion->ultimoIdInsert();
+}
+
+function update_ruta_imagen($idJuego, $ruta_imagen){
+    $conexion = abrirConexion();
+    $params = array(
+        array("idJuego", $idJuego, "int"),
+        array("ruta_imagen", $ruta_imagen, "string")
+     );
+    $sql = "UPDATE juegos SET poster = :ruta_imagen WHERE id = :idJuego";
     $conexion->consulta($sql, $params);
     return $conexion->ultimoIdInsert();
+    
 }
 
 function updatePuntuacionJuego($juegoId){
@@ -319,4 +345,22 @@ function ultimaPaginaDeComentarios($texto){
     $paginas = ceil($fila["total"] / $size) - 1;
     
     return $paginas;
+}
+
+function obtenerGeneros(){
+    $conexion = abrirConexion();
+    
+    $sql = "SELECT id, nombre FROM generos";
+    $conexion->consulta($sql);
+
+    return $conexion->restantesRegistros();
+        
+}
+
+function obtenerConsolas(){
+    $conexion = abrirConexion();
+    
+    $sql = "SELECT id, nombre FROM consolas";
+    $conexion->consulta($sql);
+    return $conexion->restantesRegistros();
 }

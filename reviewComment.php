@@ -8,6 +8,7 @@ if(isset($_SESSION['usuarioLogueado'])) {
     $usuarioLogueado = $_SESSION['usuarioLogueado'];
 }
 
+
 $mySmarty = getSmarty();
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
 $mySmarty->display("reviewComment.tpl");

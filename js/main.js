@@ -48,7 +48,7 @@ $(document).ready(function(){
         cargarJuegos();
     });
     
-    $("#orden").click(function(){
+    $("#orden").change(function(){
         pagina = 0;
         orden = $("#orden").val();
         genero = $("#genero").val();

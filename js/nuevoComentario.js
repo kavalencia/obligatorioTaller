@@ -24,6 +24,7 @@ function cargarComentarioYPuntaje(){
             com = $("#nuevoCom").val();
             inicio = 0;
             cargarComentarioYPuntaje();
+            cargarComentariosJuego();
         });
         
     }).fail(function(){

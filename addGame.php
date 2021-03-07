@@ -8,6 +8,8 @@ if(isset($_SESSION['usuarioLogueado'])) {
     $usuarioLogueado = $_SESSION['usuarioLogueado'];
 }
 
+$gens = obtenerGeneros();
 $mySmarty = getSmarty();
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
+$mySmarty->assign("gens", $gens);
 $mySmarty->display("addGame.tpl");

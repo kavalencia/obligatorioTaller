@@ -7,6 +7,6 @@
     </head>
     <body>
         {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
-        {include file="contenedorAgregarJuego.tpl"}
+        {include file="contenedorAgregarJuego.tpl" generos=$gens}
     </body>
 </html> 

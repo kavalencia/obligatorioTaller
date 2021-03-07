@@ -5,7 +5,12 @@
         
         <form action="insertGame.php" method="POST" enctype="multipart/form-data">
             Nombre del Juego: <input type="text" name="nombre_juego" maxLength = 30 required/><br>
-            Genero: <input type="text" name="genero" maxLength = 30 required/><br>
+            Genero: <!--input type="text" name="genero" maxLength = 30 required/><br-->
+            <select name="genero" id="genero">   
+                {foreach from=$generos item=gen}
+                    <option value={$gen.id}>{$gen.nombre}</option>
+                {/foreach}   
+            </select><br>
             Fecha de lanzamiento: <input type="date" min="1940-01-01" max="2040-12-31" name="fecha_lanzamiento" required/><br>
             Resumen: <input type="text" name="resumen" maxLength = 30 required/><br>
             Creado por: <input type="text" name="creado_por" maxLength = 30 required/><br>

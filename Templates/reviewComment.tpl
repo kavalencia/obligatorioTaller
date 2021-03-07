@@ -9,6 +9,10 @@
     </head>
     <body>
         {include file="encabezadoUsuarioLogeadoAdmin.tpl" usuarioLogueado=$usuarioLogueado}
-        <div id="contenedorComentarios"></div>
+        {if isset($usuarioLogueado)}
+            <div id="contenedorComentarios"></div>
+        {else}
+            <h5>Para revisar los comentarios debes ingresar como usuario administrador</h5>
+        {/if}
     </body>
 </html> 

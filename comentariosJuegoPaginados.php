@@ -20,12 +20,17 @@ if (isset($_GET['juegoId'])) {
     $juegoId = $_GET['juegoId'];
 }
 
-if (isset($_GET['com'])) {
-    $com = $_GET['com'];
+if (isset($_GET['comId'])) {
+    $comId = $_GET['comId'];
 }
 
-if (isset($_GET['puntaje'])) {
-    $puntaje = $_GET['puntaje'];
+if (isset($_GET['borrar'])) {
+    $borrar = $_GET['borrar'];
+}
+
+if($borrar == "1"){
+    borrarComentario($comId);
+    updatePuntuacionJuego($juegoId);
 }
 
 session_start();

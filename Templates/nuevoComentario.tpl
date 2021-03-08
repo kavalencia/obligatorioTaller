@@ -1,5 +1,5 @@
 {if isset($usuarioLogueado)}
-    {if !($tieneComentario)}
+    {if (!$tieneComentario)}
         <h2>Tu comentario y puntaje nos interesa</h2>  
         <textarea id="nuevoCom" rows="5" cols="40">Ingresa tu comentario aquí</textarea>
         <p class="puntaje">

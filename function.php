@@ -55,11 +55,12 @@ function getTieneComentarioParaJuego($juegoId, $usuarioId){
         array("juegoId", $juegoId, "int"),
         array("usuarioId", $usuarioId, "int"),
     );
-    $sql = "SELECT COUNT(*)
+    $sql = "SELECT COUNT(*) as cantComentarios
             FROM comentarios c 
             WHERE c.id_juego = :juegoId AND c.id_usuario = :usuarioId";  
     $conexion->consulta($sql, $params);
-    return ($conexion->restantesRegistros() != 0);
+    $comentarioPorJuego = $conexion->siguienteRegistro();
+    return ($comentarioPorJuego['cantComentarios'] != 0);
 }
 
 function getCantidadConsolasPorJuego($id){

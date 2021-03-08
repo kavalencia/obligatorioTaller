@@ -16,6 +16,8 @@ if (isset($_GET['puntaje'])) {
     $puntaje = $_GET['puntaje'];
 }
 
+
+
 session_start();
 $usuarioLogueado = NULL;
 if (isset($_SESSION['usuarioLogueado'])) {
@@ -31,11 +33,13 @@ if (isset($_GET['com'])) {
 if (isset($_GET['inicio'])) {
     $inicio = $_GET['inicio'];
 }
-    
 
-if ($inicio == 0 ){   
+
+if ($inicio == 0 && !$tieneComentario){   
     insertComentarioJuego($com, $puntaje, $juegoId, $usuarioLogueado['id']);
     updatePuntuacionJuego($juegoId);
+    $tieneComentario = getTieneComentarioParaJuego($juegoId, $usuarioLogueado['id']);
+    
 }
 
 $mySmarty->assign("tieneComentario", $tieneComentario);

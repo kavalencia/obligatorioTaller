@@ -35,7 +35,7 @@ function cargarComentariosJuego(){
             pagina += 1;
             cargarComentariosJuego();
         });
-        
+        cargarComentarioYPuntaje();
     }).fail(function(){
         alert('error!')
     });

@@ -3,8 +3,6 @@
         {$com.texto}
     </div>
     <div id="comentarioBoton">
-            <input id="comId" type="hidden" name="comId" value="{$com.id}"></input>
-            <input id="juegoId" type="hidden" name="juegoId" value="{$com.id_juego}"></input>
-            <input class="botonBorrar" type="submit" value="Borrar" />
+            <input class="botonBorrar" data-comid="{$com.id}" data-juegoid="{$com.id_juego}" type="submit" value="Borrar" />
     </div>
 </div>

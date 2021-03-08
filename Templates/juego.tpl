@@ -25,5 +25,3 @@
         {/if} 
         <div id="comentariosJuegoPagina">
         </div>
-        <div id="comentarioYPuntuacion">
-        </div>

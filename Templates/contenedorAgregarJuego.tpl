@@ -16,7 +16,14 @@
             Creado por: <input type="text" name="creado_por" maxLength = 30 required/><br>
             Video de Youtube: <input type="text" name="video_yoputube"/><br>
             Cantidad de visitas: <input type="text" name="cant_visitas" maxLength = 30 required/><br>
-            Lista de consolas: <input type="text" name="lista_consolas" maxLength = 30 required/><br>
+            Lista de consolas: <br><!--input type="text" name="lista_consolas" maxLength = 30 required/-->
+            <select name="consolas[]" id="consola" multiple="multiple" tabindex="6" style="width:400px">
+                {foreach from=$consolas item=con}
+                    <option value={$con.id}>{$con.nombre}</option>
+                    <!--input type="radio" id="radiob" name="radiob" value="{$con.id}">{$con.nombre}</input-->
+                {/foreach}
+            </select><br>
+            <!--input type="submit" name="submit" style="padding:5px;" value="Submit"-->
             Imagen: <input type="file" accept=".jpg,.png" name= "imagen_juego" required/><br><br>
             <input type="submit" value="Insertar" /><br><br>
         </form>

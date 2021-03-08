@@ -4,6 +4,7 @@ var juegoId = 0;
 var inicio = 1;
 
 function cargarComentarioYPuntaje(){
+    
     $.ajax({
        url: "nuevoComentario.php",
        data: {
@@ -15,18 +16,15 @@ function cargarComentarioYPuntaje(){
        dataType: "html"
     }).done(function(html){
         $("#comentarioYPuntuacion").html(html);
-        
         $("input[name=estrellas]").click(function () {    
             puntaje = $(this).val();
         });
-        
         $("#buttonComPun").click(function(){
             com = $("#nuevoCom").val();
-            inicio = 0;
-            cargarComentarioYPuntaje();
+            inicio = 0;   
             cargarComentariosJuego();
+            cargarComentarioYPuntaje();
         });
-        
     }).fail(function(){
         alert('error!')
     });

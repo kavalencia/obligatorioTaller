@@ -18,13 +18,16 @@ function cargar(){
     }).done(function(html){
         $("#contenedorComentarios").html(html);
         
-        $(".botoncom").click(function(){
-                borrar = 1;
-                comId = $("#comId").val();
-                juegoId = $("#juegoId").val();
-                cargar();
-                borrar = 0;
-            });
+       
+//        $(".botoncom").click(function(){
+//               
+//                borrar = 1;
+//            
+//                comId = $("#comId").val();              
+//                juegoId = $("#juegoId").val();
+//                cargar();
+//                borrar = 0;
+//            });
         
         $("#anterior").click(function(){
             pagina -= 1;
@@ -41,6 +44,13 @@ function cargar(){
     });
 }
 
+function borrarComentario(cId, jId){
+    borrar = 1;
+    juegoId = jId;
+    comId= cId;
+    cargar();
+    borrar = 0;
+}
 $(document).ready(function(){
     
     $("#buscar").click(function(){

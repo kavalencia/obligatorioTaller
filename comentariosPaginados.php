@@ -19,7 +19,7 @@
     if(isset($_GET['juegoId'])){
         $juegoId = $_GET['juegoId'];
     }
-    
+     
     $comId = "";
     if(isset($_GET['comId'])){
         $comId = $_GET['comId'];
@@ -29,8 +29,8 @@
     if(isset($_GET['borrar'])){
         $borrar = $_GET['borrar'];
     }
-
-    if(borrar == "1"){
+    
+    if($borrar == "1"){
         borrarComentario($comId);
         updatePuntuacionJuego($juegoId);
     }

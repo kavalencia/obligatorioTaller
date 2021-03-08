@@ -10,7 +10,6 @@
         "puntuacion" => $_POST["puntuacion"],
         "fecha_lanzamiento" => $_POST["fecha_lanzamiento"],
         "empresa" => $_POST["creado_por"],
-        "visualizaciones" => $_POST["cant_visitas"],
         "url_video" => $_POST["video_yoputube"],
         "resumen" => $_POST["resumen"]
     );

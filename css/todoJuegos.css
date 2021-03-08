@@ -29,10 +29,17 @@ label {
   color: grey;
 }
 
+#puntuacion {
+    height: 10%;
+    width: 12%;
+}
+
 .puntaje {
   direction: rtl;
   unicode-bidi: bidi-override;
 }
+
+
 
 label:hover,
 label:hover ~ label {
@@ -41,6 +48,24 @@ label:hover ~ label {
 
 input[type="radio"]:checked ~ label {
   color: orange;
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}
+
+
+#menu_admin a{
+    color: blue;   
+    text-shadow: 2px 2px 4px #000000;
+}
+
+#menu_usuario a{
+    color: blue;   
+    text-shadow: 2px 2px 4px #000000;
 }
 
 
@@ -52,9 +77,14 @@ input[type="radio"]:checked ~ label {
     align-items: center;
 }
 
+.titulo-destacado {
+    color:#00ff00;
+}
+
 #encabezado h1 {
     display: inline-block;
     width: 100%;
+    text-shadow: 0 0 3px #FF0000;
 }
 
 #encabezado cabezal {

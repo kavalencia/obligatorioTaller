@@ -212,7 +212,7 @@ function insertarJuego($juego) {
         array("puntuacion", "0", "int"),
         array("fecha_lanzamiento", $juego["fecha_lanzamiento"], "string"),
         array("empresa", $juego["empresa"], "string"),
-        array("visualizaciones", $juego["visualizaciones"], "int"),
+        array("visualizaciones", "0", "int"),
         array("url_video", $juego["url_video"], "string"),
         array("resumen", $juego["resumen"], "string"),
     );

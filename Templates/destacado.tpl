@@ -1,4 +1,4 @@
-<a>Destacado</a>
+<h1 class="titulo-destacado"> Destacado</h1>
 <div class = juego-destacado>
   <img src="./img/juegosCaratula/{$dest.poster}" alt="logo">
  

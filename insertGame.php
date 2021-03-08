@@ -12,13 +12,15 @@
         "empresa" => $_POST["creado_por"],
         "visualizaciones" => $_POST["cant_visitas"],
         "url_video" => $_POST["video_yoputube"],
-        "resumen" => $_POST["resumen"],
-        "lista_consolas" => $_POST["lista_consolas"],
+        "resumen" => $_POST["resumen"]
     );
+   
+    $listaConsolas = array();
+    $listaConsolas = $_POST["consolas"];
     
    $poster = $_FILES["imagen_juego"];
    $idJuego = insertarJuego($juego);
-   
+     
    // Ejemplo 1
    $types  = $_FILES["imagen_juego"]["type"];
    $ext = explode("/", $types);
@@ -28,4 +30,7 @@
        move_uploaded_file($poster["tmp_name"], "img/juegosCaratula/" . $ruta_imagen);
    }
    update_ruta_imagen($idJuego, $ruta_imagen);
+   
+   updateListaConsolas($idJuego, $listaConsolas);
+ 
    header('location:juego.php?juegId=' . $idJuego);

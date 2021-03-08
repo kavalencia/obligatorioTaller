@@ -9,7 +9,9 @@ if(isset($_SESSION['usuarioLogueado'])) {
 }
 
 $gens = obtenerGeneros();
+$cons = obtenerConsolas();
 $mySmarty = getSmarty();
 $mySmarty->assign("usuarioLogueado", $usuarioLogueado);
 $mySmarty->assign("gens", $gens);
+$mySmarty->assign("cons", $cons);
 $mySmarty->display("addGame.tpl");

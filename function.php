@@ -203,7 +203,6 @@ function logout() {
 }
 
 function insertarJuego($juego) {
-    var_dump($juego);
 
     $conexion = abrirConexion();
     $params = array(
@@ -218,7 +217,6 @@ function insertarJuego($juego) {
     );
     $sql = "INSERT INTO juegos (nombre, id_genero, puntuacion, fecha_lanzamiento, empresa, visualizaciones, url_video, resumen) VALUES(:nombre, :id_genero, :puntuacion, :fecha_lanzamiento, :empresa, :visualizaciones, :url_video, :resumen)";
     $conexion->consulta($sql, $params);
-    var_dump($conexion->ultimoIdInsert());
     return $conexion->ultimoIdInsert();
 }
 
@@ -232,6 +230,20 @@ function update_ruta_imagen($idJuego, $ruta_imagen){
     $conexion->consulta($sql, $params);
     return $conexion->ultimoIdInsert();
     
+}
+
+function updateListaConsolas($idJuego, $listaConsolas){
+    $conexion = abrirConexion();
+    for($i = 0; $i < count($listaConsolas); ++$i) {
+        $params = array(
+          array("id_juego", $idJuego, "int"),  
+          array("id_consola", $listaConsolas[$i], "int"),  
+        );
+        $sql = "INSERT INTO juegos_consolas(id_juego, id_consola) VALUES (:id_juego, :id_consola)";
+        $conexion->consulta($sql, $params);
+    }
+    
+    return $conexion->ultimoIdInsert();
 }
 
 function updatePuntuacionJuego($juegoId){

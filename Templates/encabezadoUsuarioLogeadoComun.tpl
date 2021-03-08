@@ -9,7 +9,7 @@
             Hola {$usuarioLogueado.alias}
             <a href="./dologout.php">Cerrar Sesion</a>
         {else}
-            <a href="register.php">Registrarse</a>
+            <a class = "" href="register.php">Registrarse</a>
             <a href="login.php">Iniciar sesion</a>
         {/if}
         

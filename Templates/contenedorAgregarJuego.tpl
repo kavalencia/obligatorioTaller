@@ -15,7 +15,6 @@
             Resumen: <input type="text" name="resumen" maxLength = 30 required/><br>
             Creado por: <input type="text" name="creado_por" maxLength = 30 required/><br>
             Video de Youtube: <input type="text" name="video_yoputube"/><br>
-            Cantidad de visitas: <input type="text" name="cant_visitas" maxLength = 30 required/><br>
             Lista de consolas: <br><!--input type="text" name="lista_consolas" maxLength = 30 required/-->
             <select name="consolas[]" id="consola" multiple="multiple" tabindex="6" style="width:400px">
                 {foreach from=$consolas item=con}

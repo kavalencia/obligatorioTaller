@@ -18,17 +18,6 @@ function cargar(){
     }).done(function(html){
         $("#contenedorComentarios").html(html);
         
-       
-//        $(".botoncom").click(function(){
-//               
-//                borrar = 1;
-//            
-//                comId = $("#comId").val();              
-//                juegoId = $("#juegoId").val();
-//                cargar();
-//                borrar = 0;
-//            });
-        
         $("#anterior").click(function(){
             pagina -= 1;
             cargar();
